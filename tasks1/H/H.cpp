@@ -11,34 +11,18 @@ int SimpleNumberTest(int number) {
     return answer;
 }
 
-int GetSimpleNumber(int position) {
-    int order = 0;
-    int number = 2;
-    while (order < position) {
-        if (SimpleNumberTest(number) == 1) {
-            order++;
-            (order == position) ? false : number++;
-        }
-        else {
-            number++;
-        }
-    }
-    return number;
-}
-
 int main() {
     int N;
     cin >> N;
     vector<int> divisors;
-    int order = 1;
-    while (N > 1) {
-        int divisor = GetSimpleNumber(order);
-        if (N % divisor == 0) {
-            N /= divisor;
-            divisors.push_back(divisor);
+    int i = 2;
+    while (N > 1 && i <= N) {
+        if (SimpleNumberTest(i) == 1 && N % i == 0) {
+            divisors.push_back(i);
+            N /= i;
         }
         else {
-            order++;
+            i++;
         }
     }
     for (int d : divisors) {
